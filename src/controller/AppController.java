@@ -33,9 +33,9 @@ public class AppController
 
 				if (nameChecker() == true && numberChecker() == true && emailChecker() == true)
 					{
-						JOptionPane.showMessageDialog(null, "Account Created!"
+						JOptionPane.showMessageDialog(null, "Account Created Sir"
 								+ "\nName: " + firstName + " " + lastName + "\nPhone Number: " + userNumber
-								+ "\nEmail: " + userEmail + panel().getSelectEmailBox().getSelectedItem());
+								+ "\nEmail: " + userEmail );
 					}
 				else
 					{
@@ -55,12 +55,12 @@ public class AppController
 
 				if (firstName.contains(" ") || firstName.matches(".*\\d.*") || firstName.length() > 30 || firstName.length() < 2)
 					{
-						firstNameError = "FIRST NAME ERROR: No Spaces, No Numbers or Symbols, More than 2 and Less than 30 letters.";
+						firstNameError = "First Name Error";
 						doesPass = false;
 					}
 				if (lastName.contains(" ") || lastName.length() > 40 || lastName.length() < 2)
 					{
-						lastNameError = "LAST NAME ERROR: No Spaces, No Numbers or Symbols, More than 2 and Less than 40 letters.";
+						lastNameError = "Last Name Error";
 						doesPass = false;
 					}
 
@@ -76,17 +76,17 @@ public class AppController
 
 				if (userNumber.length() > 10)
 					{
-						numberError = "NUMBER ERROR: Too many numbers were entered.";
+						numberError = "Number Error: Too many numbers were entered.";
 						doesPass = false;
 					}
 				if (userNumber.length() < 10)
 					{
-						numberError = "NUMBER ERROR: Too few numbers were entered.";
+						numberError = "Number Error: Too little numbers were entered.";
 						doesPass = false;
 					}
 				if (userNumber.matches(".*[a-zA-Z]+.*"))
 					{
-						numberError = "NUMBER ERROR: Contains letters!";
+						numberError = "Number Error: Contains letters fool";
 						doesPass = false;
 					}
 
@@ -107,7 +107,7 @@ public class AppController
 
 				if (matcher.matches() == true|| userEmail.length() > 20 || userEmail.isEmpty())
 					{
-						emailError = "EMAIL ERROR: Cannot contain spaces or characters and must be less than 20 characters.";
+						emailError = "Email Error: No spaces or characters and must be less than 20 characters.";
 						doesPass = false;
 					}
 				return doesPass;

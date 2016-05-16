@@ -19,32 +19,41 @@ public class AppPanel extends JPanel
 		private JTextField userNumberField;
 		private JTextField userMailField;
 
-		private JComboBox<String> selectEmailBox;
-
 		private JButton createButton;
-		private JButton clearButton;
 
 		public AppPanel(AppController controller)
 			{
 				this.controller = controller;
 				layout = new SpringLayout();
 
-				firstNameLabel = new JLabel("Enter your first name :");
-				lastNameLabel = new JLabel("Enter your last name :");
-				userNumberLabel = new JLabel("<html>Enter your phone number starting with the area code<br>Example : 8015694700</html>");
-				userMailLabel = new JLabel("Enter your email :");
+				firstNameLabel = new JLabel("First Name:");
+				lastNameLabel = new JLabel("Last Name:");
+				userNumberLabel = new JLabel("Phone Number:");
+				userMailLabel = new JLabel("Email:");
 
 				firstNameField = new JTextField();
+				layout.putConstraint(SpringLayout.NORTH, lastNameLabel, 32, SpringLayout.SOUTH, firstNameField);
+				layout.putConstraint(SpringLayout.SOUTH, firstNameField, 51, SpringLayout.SOUTH, firstNameLabel);
 				lastNameField = new JTextField();
+				
+								layout.putConstraint(SpringLayout.EAST, firstNameField, 0, SpringLayout.EAST, lastNameField);
+				layout.putConstraint(SpringLayout.NORTH, userNumberLabel, 32, SpringLayout.SOUTH, lastNameField);
+				layout.putConstraint(SpringLayout.SOUTH, lastNameField, 51, SpringLayout.SOUTH, lastNameLabel);
 				userNumberField = new JTextField();
+				layout.putConstraint(SpringLayout.EAST, lastNameField, 0, SpringLayout.EAST, userNumberField);
+				layout.putConstraint(SpringLayout.NORTH, userMailLabel, 32, SpringLayout.SOUTH, userNumberField);
+				layout.putConstraint(SpringLayout.SOUTH, userNumberField, 51, SpringLayout.SOUTH, userNumberLabel);
 				userMailField = new JTextField();
+				layout.putConstraint(SpringLayout.EAST, userNumberField, 0, SpringLayout.EAST, userMailField);
+				layout.putConstraint(SpringLayout.SOUTH, userMailField, 45, SpringLayout.SOUTH, userMailLabel);
 
-				String[] emailList = new String[]
-					{ "@ Gmail.com", "@ Yahoo.com", "@ Outlook.com", "@ AOL.com", "@ Comcast.net", "@ Hotmail.com" };
-				selectEmailBox = new JComboBox<>(emailList);
 
 				createButton = new JButton("Create Account");
-				clearButton = new JButton("Clear Fields");
+				layout.putConstraint(SpringLayout.NORTH, createButton, 38, SpringLayout.SOUTH, userMailField);
+				layout.putConstraint(SpringLayout.SOUTH, createButton, -75, SpringLayout.SOUTH, this);
+				layout.putConstraint(SpringLayout.EAST, userMailField, 0, SpringLayout.EAST, createButton);
+				layout.putConstraint(SpringLayout.WEST, createButton, 10, SpringLayout.WEST, this);
+				layout.putConstraint(SpringLayout.EAST, createButton, -10, SpringLayout.EAST, this);
 
 				buildComponents();
 				buildListeners();
@@ -64,21 +73,11 @@ public class AppPanel extends JPanel
 				add(userNumberField);
 				add(userMailField);
 
-				add(selectEmailBox);
-
 				add(createButton);
-				add(clearButton);
 			}
 
 		private void buildListeners()
 			{
-				clearButton.addActionListener(new ActionListener()
-					{
-						public void actionPerformed(ActionEvent clicked)
-						{
-							controller.clearFields();
-						}
-					});
 				
 				createButton.addActionListener(new ActionListener()
 					{
@@ -96,32 +95,14 @@ public class AppPanel extends JPanel
 				layout.putConstraint(SpringLayout.WEST, lastNameLabel, 10, SpringLayout.WEST, this);
 				layout.putConstraint(SpringLayout.WEST, userNumberLabel, 10, SpringLayout.WEST, this);
 				layout.putConstraint(SpringLayout.WEST, userMailLabel, 10, SpringLayout.WEST, this);
-
-				layout.putConstraint(SpringLayout.EAST, firstNameField, -300, SpringLayout.EAST, this);
-				layout.putConstraint(SpringLayout.NORTH, lastNameLabel, 50, SpringLayout.SOUTH, firstNameField);
 				layout.putConstraint(SpringLayout.NORTH, firstNameField, 5, SpringLayout.SOUTH, firstNameLabel);
 				layout.putConstraint(SpringLayout.WEST, firstNameField, 10, SpringLayout.WEST, this);
-				layout.putConstraint(SpringLayout.EAST, lastNameField, -300, SpringLayout.EAST, this);
-				layout.putConstraint(SpringLayout.NORTH, userNumberLabel, 50, SpringLayout.SOUTH, lastNameField);
 				layout.putConstraint(SpringLayout.NORTH, lastNameField, 5, SpringLayout.SOUTH, lastNameLabel);
 				layout.putConstraint(SpringLayout.WEST, lastNameField, 10, SpringLayout.WEST, this);
-				layout.putConstraint(SpringLayout.EAST, userNumberField, -300, SpringLayout.EAST, this);
-				layout.putConstraint(SpringLayout.NORTH, userMailLabel, 50, SpringLayout.SOUTH, userNumberField);
 				layout.putConstraint(SpringLayout.NORTH, userNumberField, 5, SpringLayout.SOUTH, userNumberLabel);
 				layout.putConstraint(SpringLayout.WEST, userNumberField, 10, SpringLayout.WEST, this);
 				layout.putConstraint(SpringLayout.NORTH, userMailField, 5, SpringLayout.SOUTH, userMailLabel);
 				layout.putConstraint(SpringLayout.WEST, userMailField, 10, SpringLayout.WEST, this);
-				layout.putConstraint(SpringLayout.EAST, userMailField, -300, SpringLayout.EAST, this);
-
-				layout.putConstraint(SpringLayout.NORTH, selectEmailBox, 73, SpringLayout.SOUTH, userNumberField);
-				layout.putConstraint(SpringLayout.WEST, selectEmailBox, 0, SpringLayout.EAST, userMailField);
-
-				layout.putConstraint(SpringLayout.NORTH, clearButton, 50, SpringLayout.SOUTH, userMailField);
-				layout.putConstraint(SpringLayout.WEST, clearButton, 10, SpringLayout.EAST, createButton);
-				layout.putConstraint(SpringLayout.EAST, clearButton, 200, SpringLayout.EAST, createButton);
-				layout.putConstraint(SpringLayout.NORTH, createButton, 50, SpringLayout.SOUTH, userMailField);
-				layout.putConstraint(SpringLayout.WEST, createButton, 10, SpringLayout.WEST, this);
-				layout.putConstraint(SpringLayout.EAST, createButton, 0, SpringLayout.EAST, userMailField);
 			}
 
 		public JTextField getFirstNameField()
@@ -144,8 +125,4 @@ public class AppPanel extends JPanel
 				return userMailField;
 			}
 
-		public JComboBox<String> getSelectEmailBox()
-			{
-				return selectEmailBox;
-			}
 	}
